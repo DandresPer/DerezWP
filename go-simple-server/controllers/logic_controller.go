@@ -34,15 +34,21 @@ func DoMainRequest() []byte {
 	return body
 }
 // FindItemsByName : Finds items by name in the SOURCE
-func FindItemsByName() []models.Item{
+func FindItemsByName(name string, source []byte) []models.Item{
 	rawData := DoMainRequest()
 	println(string(rawData[0:300]))
 
 	var f models.FullResponse
 	json.Unmarshal(rawData, &f)
-	var g []models.Item
-	for i := 0; i < len(f.Stashes); i++{
-		fmt.Println(f.Stashes[i].AccountName)
+	itemArray := f.Stashes
+	var filteredItems []models.Item
+	for i := 0; i < len(itemArray); i++{
+		for j := 0; j < len(itemArray[i].Items); i++{
+			if(itemArray[i].Items[j].Name == name){
+				filteredItems = append(filteredItems, itemArray[i].Items[j])
+			}
+		}
+		fmt.Println(f.Stashes[i].AccountName)	
 	}
-	return g
+	return filteredItems
 }

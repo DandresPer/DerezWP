@@ -37,15 +37,16 @@ func DoMainRequest(nextChangeID string) []byte {
 	}
 	return body
 }
-var popo = ""
+var currentNextChangeID = ""
 // FindItemsByName : Finds items by name in the SOURCE
 func FindItemsByName(name string) []models.Item{
 	var FilteredItems []models.Item
-	for popo != "0" 	{
-		rawData := DoMainRequest(popo)
+	for currentNextChangeID != lastNextChangeID 	{
+		var lastNextChangeID = currentNextChangeID
+		rawData := DoMainRequest(currentNextChangeID)
 		var f models.FullResponse
 		json.Unmarshal(rawData, &f)
-		popo = f.NextChangeID
+		currentNextChangeID = f.NextChangeID
 		itemArray := f.Stashes
 		
 		for i := 0; i < len(itemArray); i++{
@@ -57,6 +58,7 @@ func FindItemsByName(name string) []models.Item{
 				}
 			}
 		}
+		
 	}
 	return FilteredItems
 }

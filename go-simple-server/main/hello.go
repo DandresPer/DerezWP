@@ -6,18 +6,9 @@ import (
 	"github.com/Nuper/DerezWP/go-simple-server/controllers"
 )
 
-// func main() {
-// 	http.HandleFunc("/", homeHandler)
-// 	http.ListenAndServe(":3000", nil)
-// }
-
-// func homeHandler(w http.ResponseWriter, r *http.Request){
-// 	w.Write([]byte("Hello World"))
-// }
-
 func main() {
 
-body := controller.DoMainRequest()
+body := controllers.DoMainRequest()
 	println(string(body[0:300]))
 
 	type Requirement struct {

@@ -42,7 +42,7 @@ func FindItemsByName() []models.Item{
 	json.Unmarshal(rawData, &f)
 	var g []models.Item
 	for i := 0; i < len(f.Stashes); i++{
-		fmt.Println(f.Stashes[i])
+		fmt.Println(f.Stashes[i].AccountName)
 	}
 	return g
 }

@@ -38,7 +38,7 @@ func DoMainRequest(nextChangeID string) []byte {
 	return body
 }
 var currentNextChangeID = ""
-var lastNextChangeID = ""
+var lastNextChangeID = "lastNextChangeID"
 // FindItemsByName : Finds items by name in the SOURCE
 func FindItemsByName(name string) []models.Item{
 	var FilteredItems []models.Item

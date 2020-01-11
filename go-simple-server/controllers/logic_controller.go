@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"github.com/Nuper/DerezWP/go-simple-server/models"
+	"time"
 )
 
 // DoMainRequest : retrieves SOURCE data
@@ -42,6 +43,8 @@ var lastNextChangeID = "lastNextChangeID"
 // FindItemsByName : Finds items by name in the SOURCE
 func FindItemsByName(name string) []models.Item{
 	var FilteredItems []models.Item
+	start := time.Now()
+	println(start.String())
 	for currentNextChangeID != lastNextChangeID 	{
 		lastNextChangeID = currentNextChangeID
 		rawData := DoMainRequest(currentNextChangeID)
@@ -61,5 +64,8 @@ func FindItemsByName(name string) []models.Item{
 		}
 		
 	}
+	elapsed := time.Since(start)
+	println(elapsed.String())
+	println("EOF");
 	return FilteredItems
 }

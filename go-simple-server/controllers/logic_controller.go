@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"encoding/json"
-	"fmt"
 	"github.com/Nuper/DerezWP/go-simple-server/models"
 )
 // DoMainRequest : retrieves SOURCE data

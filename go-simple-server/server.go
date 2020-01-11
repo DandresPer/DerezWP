@@ -9,8 +9,6 @@ import (
 
 func main() {
 
-	rawData := controllers.DoMainRequest()
-	println(string(rawData[0:300]))
 	myitems := controllers.FindItemsByName("Cold Penetration Support", rawData)
 
 	var f models.FullResponse

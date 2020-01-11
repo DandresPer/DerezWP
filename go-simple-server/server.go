@@ -9,13 +9,13 @@ import (
 
 func main() {
 
-body := controllers.DoMainRequest()
-	println(string(body[0:300]))
+	rawData := controllers.DoMainRequest()
+	println(string(rawData[0:300]))
 
 	//println(len(string(body)))
 
 	var f models.FullResponse
-	json.Unmarshal(body, &f)
+	json.Unmarshal(rawData, &f)
 	fmt.Println(f.NextChangeID)
 	fmt.Println(f.Stashes[0].AccountName)
 	fmt.Println(f.Stashes[0].Items[0].Verified)

@@ -6,6 +6,6 @@ import (
 
 func main() {
 
-	myitems := controllers.FindItemsByName("Cold Penetration Support")
+	controllers.FindItemsByName("Cold Penetration Support")
 
 }

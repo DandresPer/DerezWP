@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Nuper/DerezWP/go-simple-server/controllers"
+	"github.com/Nuper/DerezWP/go-simple-server/models"
 )
 
 func main() {
@@ -11,60 +12,9 @@ func main() {
 body := controllers.DoMainRequest()
 	println(string(body[0:300]))
 
-	type Requirement struct {
-		Name string
-		//Values
-		DisplayMode int
-	}
-
-	type Property struct {
-		Name string
-		//Values
-		DisplayMode int
-	}
-
-	type Item struct {
-		Verified   bool
-		W          int
-		H          int
-		Icon       string
-		League     string
-		ID         string
-		Name       string
-		TypeLine   string
-		Identified string
-		Ilvl       string
-		Properties []Property
-		// //ExplicitiMods
-		// //flavourText
-		// //frameType
-		StackSize    int
-		MaxStackSize int
-		ArtFileName  string
-		//extended
-		X           int
-		Y           int
-		InventoryID string
-	}
-
-	type Stash struct {
-		ID                string
-		Public            bool
-		AccountName       string
-		LastCharacterName string
-		Stash             string
-		StashType         string
-		League            string
-		Items             []Item
-	}
-
-	type FullResponse struct {
-		NextChangeID string `json:"next_change_id"`
-		Stashes      []Stash
-	}
 	//println(len(string(body)))
 
-	var f FullResponse
+	var f models.FullResponse
 	json.Unmarshal(body, &f)
 	fmt.Println(f.NextChangeID)
 	fmt.Println(f.Stashes[0].AccountName)

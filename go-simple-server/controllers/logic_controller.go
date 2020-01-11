@@ -39,7 +39,7 @@ func DoMainRequest(nextChangeID string) []byte {
 }
 var popo = ""
 // FindItemsByName : Finds items by name in the SOURCE
-func FindItemsByName(name string, source []byte) []models.Item{
+func FindItemsByName(name string) []models.Item{
 	var FilteredItems []models.Item
 	for popo != "0" 	{
 		rawData := DoMainRequest(popo)

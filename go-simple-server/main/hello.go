@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Nuper/DerezWP/go-simple-server/controller"
+	"github.com/Nuper/DerezWP/go-simple-server/controllers"
 )
 
 // func main() {

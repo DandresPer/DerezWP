@@ -49,7 +49,7 @@ func FindItemsByName(name string, source []byte) []models.Item{
 				filteredItems = append(filteredItems, itemArray[i].Items[j])
 			}
 		}
-		fmt.Println(f.Stashes[i].AccountName)	
+		//fmt.Println(f.Stashes[i].AccountName)	
 	}
 	return filteredItems
 }

@@ -17,7 +17,7 @@ import (
 
 func main() {
 
-body, _ := controller.DoMainRequest()
+body := controller.DoMainRequest()
 	println(string(body[0:300]))
 
 	type Requirement struct {

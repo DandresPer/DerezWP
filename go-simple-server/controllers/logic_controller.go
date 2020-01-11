@@ -38,11 +38,12 @@ func DoMainRequest(nextChangeID string) []byte {
 	return body
 }
 var currentNextChangeID = ""
+var lastNextChangeID = ""
 // FindItemsByName : Finds items by name in the SOURCE
 func FindItemsByName(name string) []models.Item{
 	var FilteredItems []models.Item
 	for currentNextChangeID != lastNextChangeID 	{
-		var lastNextChangeID = currentNextChangeID
+		lastNextChangeID = currentNextChangeID
 		rawData := DoMainRequest(currentNextChangeID)
 		var f models.FullResponse
 		json.Unmarshal(rawData, &f)
@@ -52,7 +53,7 @@ func FindItemsByName(name string) []models.Item{
 		for i := 0; i < len(itemArray); i++{
 			for j := 0; j < len(itemArray[i].Items); j++{
 				if(itemArray[i].Items[j].TypeLine == name){
-					println(popo);
+					println(currentNextChangeID);
 					println("MATCH FOUND! " + itemArray[i].Items[j].TypeLine)
 					FilteredItems = append(FilteredItems, itemArray[i].Items[j])
 				}

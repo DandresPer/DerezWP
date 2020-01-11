@@ -43,7 +43,7 @@ func FindItemsByName(name string, source []byte) []models.Item{
 	itemArray := f.Stashes
 	var filteredItems []models.Item
 	for i := 0; i < len(itemArray); i++{
-		for j := 0; j < len(itemArray[i].Items); i++{
+		for j := 0; j < len(itemArray[i].Items); j++{
 			if(itemArray[i].Items[j].TypeLine == name){
 				println("MATCH FOUND! " + itemArray[i].Items[j].TypeLine)
 				filteredItems = append(filteredItems, itemArray[i].Items[j])

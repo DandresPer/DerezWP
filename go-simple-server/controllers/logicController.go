@@ -1,12 +1,12 @@
-package controllers
+package controller
 
 import (
 	"io/ioutil"
 	"log"
 	"net/http"
 )
-
-func doMainRequest() []byte {
+// DoMainRequest : retrieves main chunk of data
+func DoMainRequest() []byte {
 	newReq, anyError := http.NewRequest("GET", "http://api.pathofexile.com/public-stash-tabs", nil)
 	//571783755-589642300-558214129-635578319-604141055
 	if anyError != nil {

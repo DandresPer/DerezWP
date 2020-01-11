@@ -7,8 +7,10 @@ import (
 	"encoding/json"
 	"github.com/Nuper/DerezWP/go-simple-server/models"
 )
+
 // DoMainRequest : retrieves SOURCE data
-func DoMainRequest() []byte {
+func DoMainRequest(nextChangeID string) []byte {
+	
 	newReq, anyError := http.NewRequest("GET", "http://api.pathofexile.com/public-stash-tabs", nil)
 	//571783755-589642300-558214129-635578319-604141055
 	if anyError != nil {
@@ -16,7 +18,10 @@ func DoMainRequest() []byte {
 	}
 	client := &http.Client{}
 	q := newReq.URL.Query()
-	q.Add("id", "571783755-589642300-558214129-635578319-604141055")
+
+	if(nextChangeID != "") {
+		q.Add("id", nextChangeID)
+	}
 	newReq.URL.RawQuery = q.Encode()
 
 	resp, anyError := client.Do(newReq)
@@ -32,23 +37,25 @@ func DoMainRequest() []byte {
 	}
 	return body
 }
+var popo = ""
 // FindItemsByName : Finds items by name in the SOURCE
 func FindItemsByName(name string, source []byte) []models.Item{
-	rawData := DoMainRequest()
-	println(string(rawData[0:300]))
-
-	var f models.FullResponse
-	json.Unmarshal(rawData, &f)
-	itemArray := f.Stashes
-	var filteredItems []models.Item
-	for i := 0; i < len(itemArray); i++{
-		for j := 0; j < len(itemArray[i].Items); j++{
-			if(itemArray[i].Items[j].TypeLine == name){
-				println("MATCH FOUND! " + itemArray[i].Items[j].TypeLine)
-				filteredItems = append(filteredItems, itemArray[i].Items[j])
+	var FilteredItems []models.Item
+	for popo != "0" 	{
+		rawData := DoMainRequest(popo)
+		var f models.FullResponse
+		json.Unmarshal(rawData, &f)
+		popo = f.NextChangeID
+		itemArray := f.Stashes
+		
+		for i := 0; i < len(itemArray); i++{
+			for j := 0; j < len(itemArray[i].Items); j++{
+				if(itemArray[i].Items[j].TypeLine == name){
+					println("MATCH FOUND! " + itemArray[i].Items[j].TypeLine)
+					FilteredItems = append(FilteredItems, itemArray[i].Items[j])
+				}
 			}
 		}
-		//fmt.Println(f.Stashes[i].AccountName)	
 	}
-	return filteredItems
+	return FilteredItems
 }

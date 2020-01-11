@@ -12,7 +12,6 @@ func main() {
 	rawData := controllers.DoMainRequest()
 	println(string(rawData[0:300]))
 	myitems := controllers.FindItemsByName("Cold Penetration Support", rawData)
-	//println(len(string(body)))
 
 	var f models.FullResponse
 	json.Unmarshal(rawData, &f)
@@ -20,5 +19,4 @@ func main() {
 	fmt.Println(f.Stashes[0].AccountName)
 	fmt.Println(f.Stashes[0].Items[0].Verified)
 	fmt.Println(len(myitems))
-
 }
